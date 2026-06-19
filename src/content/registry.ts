@@ -10,7 +10,11 @@ import { creational } from "./lessons/creational";
 import { structural } from "./lessons/structural";
 import { behavioral } from "./lessons/behavioral";
 import { architecture } from "./lessons/architecture";
-import { practices } from "./lessons/practices";
+import { quality } from "./lessons/quality";
+import { errors } from "./lessons/errors";
+import { qa } from "./lessons/qa";
+import { testing } from "./lessons/testing";
+import { testdesign } from "./lessons/testdesign";
 
 export const allLessons: Lesson[] = [
   ...overview,
@@ -23,7 +27,11 @@ export const allLessons: Lesson[] = [
   ...structural,
   ...behavioral,
   ...architecture,
-  ...practices,
+  ...quality,
+  ...errors,
+  ...qa,
+  ...testing,
+  ...testdesign,
 ];
 
 const lessonBySlug = new Map(allLessons.map((l) => [l.slug, l]));

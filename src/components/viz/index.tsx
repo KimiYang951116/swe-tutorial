@@ -10,6 +10,7 @@ import {
   ObserverViz,
 } from "./patternsViz";
 import { MvcViz } from "./archViz";
+import { TestingPyramidViz, PartitionsViz } from "./qaViz";
 
 /** Maps a lesson's `viz` key to its interactive animation component. */
 export const vizRegistry: Record<string, ComponentType> = {
@@ -32,6 +33,9 @@ export const vizRegistry: Record<string, ComponentType> = {
   observer: ObserverViz,
   // architecture
   mvc: MvcViz,
+  // testing & QA
+  "testing-pyramid": TestingPyramidViz,
+  partitions: PartitionsViz,
 };
 
 export function hasViz(key: string | undefined): boolean {
