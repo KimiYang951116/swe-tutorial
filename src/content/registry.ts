@@ -19,8 +19,9 @@ import { integration } from "./lessons/integration";
 import { documentation } from "./lessons/documentation";
 import { process } from "./lessons/process";
 import { collaboration } from "./lessons/collaboration";
+import { interactiveBySlug } from "./quizzes";
 
-export const allLessons: Lesson[] = [
+const rawLessons: Lesson[] = [
   ...overview,
   ...oop,
   ...requirements,
@@ -41,6 +42,13 @@ export const allLessons: Lesson[] = [
   ...process,
   ...collaboration,
 ];
+
+// Merge in quiz / flashcard / ordering content (kept in a separate file so any
+// lesson can gain interactive practice without editing its source file).
+export const allLessons: Lesson[] = rawLessons.map((lesson) => {
+  const extra = interactiveBySlug[lesson.slug];
+  return extra ? { ...lesson, ...extra } : lesson;
+});
 
 const lessonBySlug = new Map(allLessons.map((l) => [l.slug, l]));
 

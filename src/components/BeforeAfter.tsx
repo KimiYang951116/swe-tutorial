@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CodeView } from "./CodeView";
+import { CopyButton } from "./CopyButton";
 import { cx } from "../lib/cx";
 import type { BeforeAfter as BeforeAfterSpec } from "../content/types";
 
@@ -8,16 +9,36 @@ type View = "split" | "before" | "after";
 export function BeforeAfter({ spec }: { spec: BeforeAfterSpec }) {
   const [view, setView] = useState<View>("split");
   const [showWhy, setShowWhy] = useState(true);
+  const [tryFirst, setTryFirst] = useState(false);
+  const [revealed, setRevealed] = useState(false);
 
   const beforeLabel = spec.beforeLabel ?? "Before";
   const afterLabel = spec.afterLabel ?? "After";
+  const hideAfter = tryFirst && !revealed;
 
   return (
     <div className="not-prose overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-800 dark:bg-slate-800/50">
-        <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-          Refactor
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Refactor
+          </span>
+          <button
+            onClick={() => {
+              setTryFirst((t) => !t);
+              setRevealed(false);
+            }}
+            className={cx(
+              "focus-ring rounded-md px-2 py-0.5 text-xs font-medium transition",
+              tryFirst
+                ? "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300"
+                : "text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+            )}
+            title="Hide the solution and try it yourself first"
+          >
+            🙈 Try first
+          </button>
+        </div>
         <div className="flex rounded-lg bg-slate-200/70 p-0.5 text-xs font-medium dark:bg-slate-800">
           {(["split", "before", "after"] as View[]).map((v) => (
             <button
@@ -51,9 +72,23 @@ export function BeforeAfter({ spec }: { spec: BeforeAfterSpec }) {
             bordered={view === "split"}
           />
         )}
-        {view !== "before" && (
-          <Pane tone="good" label={afterLabel} icon="✓" code={spec.after} />
-        )}
+        {view !== "before" &&
+          (hideAfter ? (
+            <div className="flex flex-col items-center justify-center gap-3 p-8 text-center">
+              <p className="text-3xl">🙈</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Try to write the improved version yourself, then reveal it.
+              </p>
+              <button
+                onClick={() => setRevealed(true)}
+                className="focus-ring rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-500"
+              >
+                Reveal the refactor
+              </button>
+            </div>
+          ) : (
+            <Pane tone="good" label={afterLabel} icon="✓" code={spec.after} />
+          ))}
       </div>
 
       {spec.notes && spec.notes.length > 0 && (
@@ -120,6 +155,9 @@ function Pane({
           {icon}
         </span>
         {label}
+        <span className="ml-auto">
+          <CopyButton text={code} />
+        </span>
       </div>
       <CodeView code={code} />
     </div>

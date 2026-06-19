@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { groupedCatalog, totalLessonCount } from "../../content/registry";
+import { useProgress } from "../../lib/progress";
 import { cx } from "../../lib/cx";
 
 export function Sidebar({
@@ -9,6 +10,7 @@ export function Sidebar({
   open: boolean;
   onNavigate: () => void;
 }) {
+  const { isUnderstood, understoodCount } = useProgress();
   return (
     <>
       {/* mobile backdrop */}
@@ -72,7 +74,19 @@ export function Sidebar({
                         )
                       }
                     >
-                      {shortTitle(lesson.title)}
+                      <span className="flex items-center gap-1.5">
+                        <span
+                          className={cx(
+                            "shrink-0 text-[11px]",
+                            isUnderstood(lesson.slug)
+                              ? "text-emerald-500"
+                              : "text-transparent"
+                          )}
+                        >
+                          ✓
+                        </span>
+                        <span>{shortTitle(lesson.title)}</span>
+                      </span>
                     </NavLink>
                   </li>
                 ))}
@@ -81,7 +95,7 @@ export function Sidebar({
           ))}
 
           <p className="mt-8 px-3 text-xs text-slate-400 dark:text-slate-600">
-            {totalLessonCount} lessons across {groupedCatalog.length} categories
+            {understoodCount} / {totalLessonCount} understood · {groupedCatalog.length} categories
           </p>
         </nav>
       </aside>

@@ -6,6 +6,12 @@ import { getLesson } from "../content/registry";
 import { ContentBlocks } from "./ContentBlocks";
 import { BeforeAfter } from "./BeforeAfter";
 import { Playground } from "./Playground";
+import { Quiz } from "./Quiz";
+import { Flashcards } from "./Flashcards";
+import { Ordering } from "./Ordering";
+import { RecallTakeaways } from "./RecallTakeaways";
+import { LessonProgress } from "./LessonProgress";
+import { ReadingProgress } from "./ReadingProgress";
 import { Visualization, hasViz } from "./viz";
 import { cx } from "../lib/cx";
 
@@ -29,6 +35,7 @@ export function LessonTemplate({ lesson }: { lesson: Lesson }) {
 
   return (
     <article className="animate-fade-in-up">
+      <ReadingProgress />
       {/* header */}
       <header className="mb-8">
         <Link
@@ -99,22 +106,37 @@ export function LessonTemplate({ lesson }: { lesson: Lesson }) {
         </>
       )}
 
-      {/* key points */}
-      {lesson.keyPoints && lesson.keyPoints.length > 0 && (
-        <div className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900/50">
-          <h2 className="mb-3 text-sm font-bold text-slate-900 dark:text-white">
-            🎯 Key takeaways
-          </h2>
-          <ul className="space-y-2">
-            {lesson.keyPoints.map((point, i) => (
-              <li key={i} className="flex gap-2.5 text-sm text-slate-600 dark:text-slate-300">
-                <span className="mt-0.5 text-indigo-500">→</span>
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      {/* ordering exercise */}
+      {lesson.ordering && (
+        <>
+          <SectionLabel>Put it in order</SectionLabel>
+          <Ordering exercise={lesson.ordering} />
+        </>
       )}
+
+      {/* flashcards */}
+      {lesson.flashcards && lesson.flashcards.length > 0 && (
+        <>
+          <SectionLabel>Flashcards</SectionLabel>
+          <Flashcards cards={lesson.flashcards} />
+        </>
+      )}
+
+      {/* quiz */}
+      {lesson.quiz && lesson.quiz.length > 0 && (
+        <>
+          <SectionLabel>Check yourself</SectionLabel>
+          <Quiz questions={lesson.quiz} />
+        </>
+      )}
+
+      {/* key points (recall-first) */}
+      {lesson.keyPoints && lesson.keyPoints.length > 0 && (
+        <RecallTakeaways points={lesson.keyPoints} />
+      )}
+
+      {/* mark understood + confidence */}
+      <LessonProgress slug={lesson.slug} />
 
       {/* related */}
       {lesson.related && lesson.related.length > 0 && (

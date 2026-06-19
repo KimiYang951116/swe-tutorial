@@ -69,6 +69,25 @@ export interface PlaygroundSpec {
   caption?: string;
 }
 
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  /** Index of the correct option. */
+  answer: number;
+  explanation?: string;
+}
+
+export interface Flashcard {
+  front: string;
+  back: string;
+}
+
+export interface OrderingExercise {
+  prompt: string;
+  /** Items in their CORRECT order; the UI shuffles them for the learner. */
+  items: string[];
+}
+
 export interface Lesson {
   slug: string;
   title: string;
@@ -86,6 +105,12 @@ export interface Lesson {
   viz?: string;
   beforeAfter?: BeforeAfter;
   playground?: PlaygroundSpec;
+  /** Multiple-choice self-check questions. */
+  quiz?: QuizQuestion[];
+  /** Flip cards for term/definition recall. */
+  flashcards?: Flashcard[];
+  /** A drag-to-order / sequencing exercise. */
+  ordering?: OrderingExercise;
   /** Quick takeaways shown at the end. */
   keyPoints?: string[];
   /** Related lesson slugs. */
