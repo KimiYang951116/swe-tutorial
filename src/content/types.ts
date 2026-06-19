@@ -17,8 +17,7 @@ export type CategoryId =
   | "integration"
   | "documentation"
   | "process"
-  | "collaboration"
-  | "practices";
+  | "collaboration";
 
 export interface Category {
   id: CategoryId;

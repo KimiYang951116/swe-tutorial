@@ -82,12 +82,44 @@ export const categories: Category[] = [
     accent: "rose",
   },
   {
-    id: "practices",
-    title: "Quality & Practices",
+    id: "quality",
+    title: "Code Quality",
     blurb:
-      "Cross-cutting craft: clean code, refactoring code smells, and testing your way to confidence.",
+      "Craft that keeps code readable and changeable — clean code, naming, SLAP, refactoring, and avoiding unsafe shortcuts.",
     icon: "✨",
     accent: "teal",
+  },
+  {
+    id: "errors",
+    title: "Errors & Robustness",
+    blurb:
+      "Handling the unexpected: exceptions, assertions, logging, and defensive programming.",
+    icon: "🛡️",
+    accent: "rose",
+  },
+  {
+    id: "qa",
+    title: "Quality Assurance",
+    blurb:
+      "Ensuring quality beyond tests — validation vs verification, static analysis, and code review.",
+    icon: "✅",
+    accent: "emerald",
+  },
+  {
+    id: "testing",
+    title: "Testing",
+    blurb:
+      "Building confidence through tests — unit testing & doubles, integration, regression, coverage, and TDD.",
+    icon: "🧪",
+    accent: "sky",
+  },
+  {
+    id: "testdesign",
+    title: "Test Case Design",
+    blurb:
+      "Choosing high-value tests — equivalence partitioning, boundary value analysis, and combining inputs.",
+    icon: "🎯",
+    accent: "violet",
   },
 ];
 
