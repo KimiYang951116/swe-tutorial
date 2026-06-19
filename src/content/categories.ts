@@ -2,6 +2,38 @@ import type { Category } from "./types";
 
 export const categories: Category[] = [
   {
+    id: "overview",
+    title: "Foundations",
+    blurb:
+      "What software engineering is really about — managing change and complexity to build software that stays useful and understandable.",
+    icon: "📖",
+    accent: "sky",
+  },
+  {
+    id: "oop",
+    title: "OOP Concepts",
+    blurb:
+      "The building blocks of object-oriented design: objects, classes, encapsulation, inheritance, polymorphism, and how classes relate.",
+    icon: "🧰",
+    accent: "violet",
+  },
+  {
+    id: "requirements",
+    title: "Requirements",
+    blurb:
+      "Capturing what to build and why — functional and non-functional requirements, user stories, use cases, and prioritization.",
+    icon: "📋",
+    accent: "amber",
+  },
+  {
+    id: "design",
+    title: "Software Design",
+    blurb:
+      "Deciding how a system should be structured — modeling, domain models, multi-level design, and how much to design up front.",
+    icon: "📐",
+    accent: "teal",
+  },
+  {
     id: "principles",
     title: "Core Principles",
     blurb:
