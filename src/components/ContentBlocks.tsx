@@ -144,6 +144,50 @@ export function ContentBlocks({ blocks }: { blocks: Block[] }) {
                 )}
               </div>
             );
+          case "table":
+            return (
+              <div
+                key={i}
+                className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800"
+              >
+                <table className="w-full border-collapse text-sm">
+                  <thead>
+                    <tr className="bg-slate-50 dark:bg-slate-800/50">
+                      {block.headers.map((h, hi) => (
+                        <th
+                          key={hi}
+                          className="border-b border-slate-200 px-3 py-2 text-left font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-200"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {block.rows.map((row, ri) => (
+                      <tr
+                        key={ri}
+                        className="border-b border-slate-100 last:border-0 dark:border-slate-800/60"
+                      >
+                        {row.map((cell, ci) => (
+                          <td
+                            key={ci}
+                            className="px-3 py-2 align-top text-slate-600 dark:text-slate-300"
+                          >
+                            <RichText text={cell} />
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {block.caption && (
+                  <p className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-800/40">
+                    {block.caption}
+                  </p>
+                )}
+              </div>
+            );
           default:
             return null;
         }

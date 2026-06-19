@@ -1,10 +1,23 @@
 export type CategoryId =
+  | "overview"
+  | "oop"
+  | "requirements"
+  | "design"
+  | "architecture"
   | "principles"
   | "solid"
   | "creational"
   | "structural"
   | "behavioral"
-  | "architecture"
+  | "quality"
+  | "errors"
+  | "qa"
+  | "testing"
+  | "testdesign"
+  | "integration"
+  | "documentation"
+  | "process"
+  | "collaboration"
   | "practices";
 
 export interface Category {
@@ -40,7 +53,8 @@ export type Block =
       title?: string;
       text: string;
     }
-  | { type: "code"; code: string; caption?: string };
+  | { type: "code"; code: string; caption?: string }
+  | { type: "table"; headers: string[]; rows: string[][]; caption?: string };
 
 export interface BeforeAfter {
   before: string;

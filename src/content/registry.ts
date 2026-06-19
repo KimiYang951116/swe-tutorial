@@ -1,5 +1,9 @@
 import type { CategoryId, Lesson } from "./types";
 import { categories, categoryById } from "./categories";
+import { overview } from "./lessons/overview";
+import { oop } from "./lessons/oop";
+import { requirements } from "./lessons/requirements";
+import { design } from "./lessons/design";
 import { principles } from "./lessons/principles";
 import { solid } from "./lessons/solid";
 import { creational } from "./lessons/creational";
@@ -9,6 +13,10 @@ import { architecture } from "./lessons/architecture";
 import { practices } from "./lessons/practices";
 
 export const allLessons: Lesson[] = [
+  ...overview,
+  ...oop,
+  ...requirements,
+  ...design,
   ...principles,
   ...solid,
   ...creational,
