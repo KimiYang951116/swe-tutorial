@@ -6,6 +6,7 @@ import { EditorView } from "@codemirror/view";
 import { runCode, type RunResult } from "./runner/runCode";
 import { useTheme } from "../lib/theme";
 import { cx } from "../lib/cx";
+import { CopyButton } from "./CopyButton";
 import type { PlaygroundSpec } from "../content/types";
 
 const setup = {
@@ -29,6 +30,8 @@ export function Playground({ spec }: { spec: PlaygroundSpec }) {
   const [code, setCode] = useState(spec.code);
   const [result, setResult] = useState<RunResult | null>(null);
   const [running, setRunning] = useState(false);
+  const [predict, setPredict] = useState(false);
+  const [guess, setGuess] = useState("");
   const dirty = useMemo(() => code !== spec.code, [code, spec.code]);
 
   const run = useCallback(async () => {
@@ -59,7 +62,20 @@ export function Playground({ spec }: { spec: PlaygroundSpec }) {
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={() => setPredict((p) => !p)}
+            className={cx(
+              "focus-ring rounded-md px-2.5 py-1 text-xs font-medium transition",
+              predict
+                ? "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300"
+                : "text-slate-500 hover:bg-slate-200 dark:text-slate-400 dark:hover:bg-slate-700"
+            )}
+            title="Guess the output before running"
+          >
+            🤔 Predict
+          </button>
+          <CopyButton text={code} />
           <button
             onClick={reset}
             disabled={!dirty && !result}
@@ -99,6 +115,21 @@ export function Playground({ spec }: { spec: PlaygroundSpec }) {
         theme={isDark ? oneDark : "light"}
         className="text-[13px]"
       />
+
+      {predict && (
+        <div className="border-t border-amber-200 bg-amber-50/60 px-3 py-2 dark:border-amber-500/20 dark:bg-amber-500/5">
+          <label className="text-xs font-semibold text-amber-800 dark:text-amber-300">
+            🤔 What will this print? (jot your guess, then Run to check)
+          </label>
+          <textarea
+            value={guess}
+            onChange={(e) => setGuess(e.target.value)}
+            rows={2}
+            placeholder="Your prediction…"
+            className="mt-1 w-full resize-y rounded-md border border-amber-200 bg-white px-2 py-1 font-mono text-[12.5px] text-slate-700 outline-none focus:border-amber-400 dark:border-amber-500/30 dark:bg-slate-900 dark:text-slate-200"
+          />
+        </div>
+      )}
 
       <div className="border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950/40">
         <div className="flex items-center gap-2 px-3 pt-2 text-[11px] font-semibold uppercase tracking-wide text-slate-400">

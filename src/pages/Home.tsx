@@ -5,6 +5,7 @@ import {
   totalLessonCount,
   getLesson,
 } from "../content/registry";
+import { useProgress } from "../lib/progress";
 import { cx } from "../lib/cx";
 
 const FEATURED = ["dry", "srp", "strategy", "observer", "decorator", "mvc"];
@@ -61,6 +62,7 @@ export function Home() {
             Jump to SOLID
           </Link>
         </div>
+        <HeroProgress />
       </section>
 
       {/* feature highlights */}
@@ -146,6 +148,28 @@ export function Home() {
           })}
         </div>
       </section>
+    </div>
+  );
+}
+
+function HeroProgress() {
+  const { understoodCount } = useProgress();
+  const pct = Math.round((understoodCount / totalLessonCount) * 100);
+  if (understoodCount === 0) return null;
+  return (
+    <div className="mx-auto mt-6 max-w-sm">
+      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <span>Your progress</span>
+        <span className="font-semibold">
+          {understoodCount} / {totalLessonCount} ({pct}%)
+        </span>
+      </div>
+      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-[width]"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
     </div>
   );
 }
