@@ -121,6 +121,38 @@ export const categories: Category[] = [
     icon: "🎯",
     accent: "violet",
   },
+  {
+    id: "integration",
+    title: "Integration & DevOps",
+    blurb:
+      "Bringing the pieces together — incremental integration, walking skeletons, build automation, CI/CD, and reuse.",
+    icon: "🔧",
+    accent: "amber",
+  },
+  {
+    id: "documentation",
+    title: "Documentation",
+    blurb:
+      "Writing docs that help the reader do a job — audiences, the four documentation modes, and guidelines.",
+    icon: "📚",
+    accent: "teal",
+  },
+  {
+    id: "process",
+    title: "Process Models",
+    blurb:
+      "How teams sequence the work — waterfall, iterative & incremental, agile, Extreme Programming, and Scrum.",
+    icon: "🔄",
+    accent: "indigo",
+  },
+  {
+    id: "collaboration",
+    title: "Project & Collaboration",
+    blurb:
+      "Working together effectively — revision control & Git, project planning, and team structures.",
+    icon: "🤝",
+    accent: "rose",
+  },
 ];
 
 export const categoryById = Object.fromEntries(
