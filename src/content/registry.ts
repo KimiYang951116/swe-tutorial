@@ -15,6 +15,10 @@ import { errors } from "./lessons/errors";
 import { qa } from "./lessons/qa";
 import { testing } from "./lessons/testing";
 import { testdesign } from "./lessons/testdesign";
+import { integration } from "./lessons/integration";
+import { documentation } from "./lessons/documentation";
+import { process } from "./lessons/process";
+import { collaboration } from "./lessons/collaboration";
 
 export const allLessons: Lesson[] = [
   ...overview,
@@ -32,6 +36,10 @@ export const allLessons: Lesson[] = [
   ...qa,
   ...testing,
   ...testdesign,
+  ...integration,
+  ...documentation,
+  ...process,
+  ...collaboration,
 ];
 
 const lessonBySlug = new Map(allLessons.map((l) => [l.slug, l]));

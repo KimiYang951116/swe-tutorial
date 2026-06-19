@@ -324,6 +324,39 @@ bus.emit("OrderPlaced", { id: "A1" });`,
     related: ["pub-sub", "observer", "microservices", "cqrs"],
   },
   {
+    slug: "service-oriented-architecture",
+    title: "Service-Oriented Architecture (SOA)",
+    category: "architecture",
+    tagline: "Build systems by combining independently accessible services.",
+    difficulty: "Advanced",
+    also: "SOA",
+    intro:
+      "Service-Oriented Architecture builds systems by combining independently accessible services. Each service exposes a well-defined interface, and applications are assembled by orchestrating these services — even across organizations and technologies.",
+    body: [
+      { type: "heading", text: "Benefits" },
+      {
+        type: "list",
+        items: [
+          "Services can be reused across applications",
+          "Systems can combine services written in different technologies",
+          "External organizations can expose services to each other",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        title: "SOA vs microservices",
+        text: "Microservices are a fine-grained, independently deployable take on the service idea. SOA is the broader concept of composing systems from accessible services, often at enterprise scale.",
+      },
+    ],
+    keyPoints: [
+      "Compose systems from independently accessible services.",
+      "Services are reusable and technology-agnostic.",
+      "Microservices are a fine-grained evolution of the idea.",
+    ],
+    related: ["microservices", "client-server", "event-driven"],
+  },
+  {
     slug: "pub-sub",
     title: "Publish–Subscribe",
     category: "architecture",
